@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ScoopOption from './ScoopOption';
+import ToppingOption from './ToppingOption';
 import Row from 'react-bootstrap/Row';
 import _ from 'lodash';
 
@@ -8,7 +9,7 @@ const Options = ({ optionType }) => {
 
   const [ items, setItems ] = useState([]);
   // TODO: replace null with ToppingOption when available
-  const ItemComponent = optionType === 'scoops' ? ScoopOption : null;
+  const ItemComponent = optionType === 'scoops' ? ScoopOption : ToppingOption;
 
   useEffect(() => {
     const fetchItems = async () => {
