@@ -1,18 +1,37 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 
 const SummaryForm = () => {
 
   const [ isChecked, setIsChecked ] = useState(false);
 
+  const checkboxLabel = (
+    <span>
+      I agree to the
+      <OverlayTrigger
+        placement="right"
+        overlay={
+          <Popover>
+            <Popover.Content>
+              No ice cream will actually be delievered
+            </Popover.Content>
+          </Popover>
+        }
+      >
+        <span style={{ color: 'blue' }}> Terms and Conditions</span>
+      </OverlayTrigger>
+    </span>
+  );
+
   return (
     <Form>
       <Form.Group>
         <Form.Check
-          data-testid="checkbox-disable-button"
           type="checkbox"
-          label="I agree to the Terms and Conditions"
+          label={checkboxLabel}
           checked={isChecked}
           onChange={e => setIsChecked(e.target.checked)}
         />
