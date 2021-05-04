@@ -3,12 +3,13 @@ import axios from 'axios';
 import ScoopOption from './ScoopOption';
 import ToppingOption from './ToppingOption';
 import Row from 'react-bootstrap/Row';
+import AlertBanner from '../common/AlertBanner';
 import _ from 'lodash';
 
 const Options = ({ optionType }) => {
 
   const [ items, setItems ] = useState([]);
-  // TODO: replace null with ToppingOption when available
+  const [ error, setError ] = useState(false);
   const ItemComponent = optionType === 'scoops' ? ScoopOption : ToppingOption;
 
   useEffect(() => {
@@ -18,14 +19,16 @@ const Options = ({ optionType }) => {
 
         setItems(res.data);
       } catch (err) {
-        // TODO: handle error response
+        setError(true);
       }
     };
 
     fetchItems();
   }, [ optionType ]);
   
-  return (
+  return error ? (
+    <AlertBanner />
+  ) : (
     <Row>
       {!_.isEmpty(items) && items.map(item => (
         <ItemComponent
