@@ -49,7 +49,7 @@ export const OrderDetailsProvider = props => {
       optionCountMap.set(itemName, parseInt(newItemCount));
       setOptionCounts(newOptionCounts);
     };
-    
+
     return [{ ...optionCounts, totals }, updateItemCount];
   }, [ optionCounts, totals ]);
 
