@@ -30,12 +30,14 @@ const OrderConfirmation = ({ setOrderPhase }) => {
     setOrderPhase('inProgress');
   };
 
-  return error ? (
-    <AlertBanner />
-  ) : (
+  if (error) return <AlertBanner />;
+
+  if (orderNumber === null) return <p>Loading...</p>;
+
+  return (
     <>
       <h2>Thank you!</h2>
-      {orderNumber !== null && <p>Your order number is {orderNumber}</p>}
+      <p>Your order number is {orderNumber}</p>
       <p>As per our terms and conditions, nothing will happen now.</p>
       <Button onClick={() => onClickCreateNewOrder()}>
         Create New Order
