@@ -7,12 +7,25 @@ const OrderEntry = ({ setOrderPhase }) => {
 
   const [ orderDetails ] = useOrderDetails();
 
+  const hasScoops = () => {
+    let result = false;
+
+    orderDetails.scoops.forEach(count => {
+      if (count > 0) result = true;
+    });
+
+    return result;
+  };
+
   return (
     <div>
       <Options optionType="scoops" />
       <Options optionType="toppings" />
       <h2>Grand Total: {orderDetails.totals.grandTotal}</h2>
-      <Button onClick={() => setOrderPhase('review')}>
+      <Button
+        onClick={() => setOrderPhase('review')}
+        disabled={!hasScoops()}
+      >
         Order Sundae!
       </Button>
     </div>
