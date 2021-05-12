@@ -15,10 +15,14 @@ const OrderSummary = ({ setOrderPhase }) => {
         <p key={name}>{name} x{orderDetails.scoops.get(name)}</p>
       ))}
 
-      <h2>Toppings</h2>
-      {[ ...orderDetails.toppings.keys() ].map(name => (
-        <p key={name}>{name} x{orderDetails.toppings.get(name)}</p>
-      ))}
+      {orderDetails.toppings.size > 0 && (
+        <>
+          <h2>Toppings</h2>
+          {[ ...orderDetails.toppings.keys() ].map(name => (
+            <p key={name}>{name} x{orderDetails.toppings.get(name)}</p>
+          ))}
+        </>
+      )}
 
       <h2>Total: {orderDetails.totals.grandTotal}</h2>
 

@@ -59,3 +59,18 @@ test('order phases for happy path', async () => {
   expect(toppingsSubtotal).toHaveTextContent('0.00');
   expect(newGrandTotal).toHaveTextContent('0.00');
 });
+
+test('order phases without toppings added', async () => {
+  render(<App />);
+
+  const chocolateInput = await screen.findByRole('spinbutton', { name: 'Chocolate' });
+  const orderButton = screen.getByRole('button', { name: /order sundae/i });
+
+  userEvent.clear(chocolateInput);
+  userEvent.type(chocolateInput, '3');
+  userEvent.click(orderButton);
+
+  const toppingsHeading = screen.queryByRole('heading', { name: /toppings/i });
+
+  expect(toppingsHeading).not.toBeInTheDocument();
+});
